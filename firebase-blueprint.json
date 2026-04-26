@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "General restaurant information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "opening_hours": { "type": "string" }
+      },
+      "required": ["name", "phone", "address"]
+    },
+    "Media": {
+      "title": "Media",
+      "description": "Images for different sections of the website",
+      "type": "object",
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "section": { "type": "string", "enum": ["hero", "gallery", "menu", "featured"] },
+        "alt": { "type": "string" }
+      },
+      "required": ["url", "section"]
+    },
+    "Reservation": {
+      "title": "Reservation",
+      "description": "Customer reservation details",
+      "type": "object",
+      "properties": {
+        "full_name": { "type": "string" },
+        "phone": { "type": "string" },
+        "party_size": { "type": "number" },
+        "reservation_date": { "type": "string", "format": "date" },
+        "reservation_time": { "type": "string" },
+        "notes": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["full_name", "phone", "party_size", "reservation_date", "reservation_time"]
+    },
+    "User": {
+      "title": "User",
+      "description": "System users and admins",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["admin", "staff"] }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/restaurant/info": {
+      "schema": "Restaurant",
+      "description": "Singleton document for restaurant info"
+    },
+    "/media": {
+      "schema": "Media",
+      "description": "Collection of media assets"
+    },
+    "/reservations": {
+      "schema": "Reservation",
+      "description": "Collection of customer reservations"
+    },
+    "/users": {
+      "schema": "User",
+      "description": "Collection of system users"
+    }
+  }
+}
